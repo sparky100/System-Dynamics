@@ -78,27 +78,30 @@ class model:
 ##############################################################################################################
 # Main Code
 
-# Define stocks and initial values
-
-Rabbit = stock("Rabbit", 20)
-Fox = stock("Fox",20)
-
-# Create Dictionary for Stocks
 
 stocks={}
-stocks={"Rabbit":Rabbit,"Fox":Fox}
 
 # Rates are as a dictionary of lists - which are then converted to a dataframe
 
 import pandas as pd
 
-ratedata={"Target":["Rabbit","Rabbit","Fox","Fox"],
-          "Source":["Rabbit","Fox","Fox","Rabbit"],
-          "RateType":[1,2,1,2],
-          "Description":["Birth rate","Predation Rate","Death Rate", "Predator Growth"], 
-          "Value":[1,-0.01,-1.0,0.01]}
+#load Stock data
+stocks_df=pd.read_csv("Stocks.csv")
 
-rates=pd.DataFrame(ratedata)
+for index, row in stocks_df.iterrows():
+    print(row.Stock)
+    stocks[row.Stock]=stock(row.Stock, row.Value)
+
+#Load rate data
+rates=pd.read_csv("Rates.csv")
+
+print ("Stock Data")
+print(stocks_df)
+print("")
+print("Rates")
+print(rates)
+print("")
+print("Starting Simulation")
 
 #Initialise Model
 model_name="Predator"

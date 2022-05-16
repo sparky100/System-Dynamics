@@ -1,5 +1,5 @@
-Target,Source,RateType,Description
-Rabbit,Rabbit,1,Birth Rate
-Rabbit,Fox,2,Predation Rate
-Fox,Rabbit,1,Death Rate
-Fox,Fox,2,Predator Growth
+Target,Source,RateType,Description,Value
+Fox,Fox,1,Death Rate,-1
+Fox,Rabbit,2,Predator Growth,0.01
+Rabbit,Rabbit,1,Birth Rate,1
+Rabbit,Fox,2,Predation Rate,-.01
