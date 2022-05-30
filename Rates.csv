@@ -1,5 +1,9 @@
 Target,Source,RateType,Description,Value
-Fox,Fox,1,Death Rate,-1
-Fox,Rabbit,2,Predator Growth,0.01
-Rabbit,Rabbit,1,Birth Rate,1
-Rabbit,Fox,2,Predation Rate,-.01
+Children,Children,1,Death Rate,-.0001
+Children,Children,1,Transation to Adults,-.05
+Children,Adults,1,Fertility Rate,0.1
+Adults,Adults,1,Death Rate,-.00
+Adults,Adults,1,Transition to Pensioners,-.05
+Adults,Children,1,Transition to Adults,.05
+Pensioners,Pensioners,1,Death Rate,-.1
+Pensioners,Adults,1,Transition to Pensioners,.05

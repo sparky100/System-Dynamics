@@ -1,0 +1,59 @@
+Target,Source,RateType,Description,Value
+Under1,Under1,1," DeathRate",-0.0001
+Under1,15_to_19,1,Age Specific Fertility Rate,0.0067
+Under1,20_to_24,1,Age Specific Fertility Rate,0.024
+Under1,25_to_29,1,Age Specific Fertility Rate,0.048
+Under1,30_to_34,1,Age Specific Fertility Rate,0.054
+Under1,35_to_39,1,Age Specific Fertility Rate,0.03
+Under1,40_to_44,1,Age Specific Fertility Rate,0.007
+Under1,Under1,1,Growth Rate,-1
+1_to_4,Under1,1,Growth Rate,1
+1_to_4,1_to_4,1,Growth Rate,-0.25
+5_to_9,1_to_4,1,Growth Rate,0.25
+5_to_9,5_to_9,1,Growth Rate,-0.2
+10_to_14,5_to_9,1,Growth Rate,0.2
+10_to_14,10_to_14,1,Growth Rate,-0.2
+15_to_19,10_to_14,1,Growth Rate,0.2
+15_to_19,15_to_19,1,Growth Rate,-0.2
+20_to_24,15_to_19,1,Growth Rate,0.2
+20_to_24,20_to_24,1,Growth Rate,-0.2
+25_to_29,20_to_24,1,Growth Rate,0.2
+25_to_29,25_to_29,1,Growth Rate,-0.2
+30_to_34,25_to_29,1,Growth Rate,0.2
+30_to_34,30_to_34,1,Growth Rate,-0.2
+35_to_39,35_to_39,1,Growth Rate,-0.2
+35_to_39,30_to_34,1,Growth Rate,0.2
+40_to_44,35_to_39,1,Growth Rate,0.2
+40_to_44,40_to_44,1,Growth Rate,-0.2
+45_to_49,45_to_49,1,Growth Rate,-0.2
+45_to_49,40_to_44,1,Growth Rate,0.2
+50_to_54,50_to_54,1,Growth Rate,-0.2
+50_to_54,45_to_49,1,Growth Rate,0.2
+55_to_59,55_to_59,1,Growth Rate,-0.2
+55_to_59,50_to_54,1,Growth Rate,0.2
+60_to_64,60_to_64,1,Growth Rate,-0.2
+60_to_64,55_to_59,1,Growth Rate,0.2
+65_to_69,65_to_69,1,Growth Rate,-0.2
+65_to_69,60_to_64,1,Growth Rate,0.2
+70_to_74,70_to_74,1,Growth Rate,-0.2
+70_to_74,65_to_69,1,Growth Rate,0.2
+75_to_79,70_to_74,1,Growth Rate,0.2
+75_to_79,75_to_79,1,Growth Rate,-0.2
+Over80,75_to_79,1,Growth Rate,0.2
+1_to_4,1_to_4,1,Death Rate,-0.0002
+5_to_9,5_to_9,1,Death Rate,-0.0001
+10_to_14,10_to_14,1,Death Rate,-0.0001
+15_to_19,15_to_19,1,Death Rate,-0.0002
+20_to_24,20_to_24,1,Death Rate,-0.0004
+25_to_29,25_to_29,1,Death Rate,-0.0006
+30_to_34,30_to_34,1,Death Rate,-0.0006
+35_to_39,35_to_39,1,Death Rate,-0.0009
+40_to_44,40_to_44,1,Death Rate,-0.0014
+45_to_49,45_to_49,1,Death Rate,-0.002
+50_to_54,50_to_54,1,Death Rate,-0.0031
+55_to_59,55_to_59,1,Death Rate,-0.0048
+60_to_64,60_to_64,1,Death Rate,-0.0078
+65_to_69,65_to_69,1,Death Rate,-0.0118
+70_to_74,70_to_74,1,Death Rate,-0.0196
+75_to_79,75_to_79,1,Death Rate,-0.0338
+Over80,Over80,1,Death Rate,-0.1075
