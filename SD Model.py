@@ -63,7 +63,7 @@ class model:
             data[key]=stocks[key].value 
 
         data["Time"]=self.start_time+(data["Time"]*self.timestep)
-        data["Year"]=round(data['Time'],0)
+        #data["Year"]=round(data['Time'],0)
         
         data.to_excel(file_name)
         return data            
@@ -80,7 +80,9 @@ class model:
 
         if line_graph:
             # plot_results.plot(x="Time", title=title, ylabel=ylabel)
-            plot_results.plot(x="Time", title=title, ylabel=ylabel,xticks=range(self.start_time,self.start_time+self.duration,1))
+#            plot_results.plot(x="Time", title=title, ylabel=ylabel,xticks=range(self.start_time,self.start_time+self.duration,1))
+            results.plot(x="Time", title=title, ylabel=ylabel,xticks=range(self.start_time,self.start_time+self.duration,1))
+
  #           plt.xticks = range(self.start_time,self.duration,1)
 
         #Vertical Stack
@@ -131,18 +133,19 @@ def import_model(stock_file, rate_file):
 ##############################################################################################################
 # Main Code
 
+from rich import print
 
 print("Starting Simulation")
 
 #Initialise Model
 model_name="Population"
-model_duration=20
-model_start_time=2020
-model_timestep=0.5
+model_duration=6
+model_start_time=0
+model_timestep=.083333
 
 simulation=model(model_name,model_duration,model_start_time, model_timestep)
 
-rates,stocks = import_model("PopStocks.csv","PopRates.csv")
+rates,stocks = import_model("StockHouses.csv","RatesHouses.csv")
 
 #Execute the model
 simulation.run(stocks, rates)
@@ -154,7 +157,7 @@ results=simulation.save_results(output_file)
 #Plot graphs
 line_graph=True
 stack_bar=True
-title="Population against Time"
-ylabel="Population in ,000s"
+title="Houses Built Over time"
+ylabel="Number"
 
 simulation.plot_graphs(results, title,ylabel, stack_bar, line_graph)

@@ -1,0 +1,7 @@
+Target,Source,RateType,Description,Value
+Houses,WIP,1,Build Rate,1
+WIP,WIP,1,Build Rate,-1
+WIP,Population,1,Adjustment Rate,4
+WIP,Houses,1,Adjustment Rate,-4
+Population,Population,1,Growth,0
+Houses,Houses,1,Decay, -.33
