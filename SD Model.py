@@ -1,3 +1,4 @@
+from click import style
 from matplotlib.style import available
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -50,10 +51,13 @@ class model:
          
     def run(self, stocks, rates):
         # simulate the model for the calculated number of steps
-        for step in range(1,self.steps):
-            self.simtime+=self.timestep
-            self.increment_time_step(step, stocks, rates)              
+        from rich.progress import track
 
+    
+        for step in track(range(1,self.steps)):
+            self.simtime+=self.timestep
+            self.increment_time_step(step, stocks, rates)   
+           
     def save_results(self, file_name):
         
         data=pd.DataFrame({"Time":range(0, self.steps)})
@@ -68,6 +72,7 @@ class model:
         data.to_excel(file_name)
         return data            
 
+    
     def plot_graphs(self, results, title,ylabel, phase_plot, stack_bar, line_graph):
         
         
@@ -123,9 +128,9 @@ def import_model(stock_file, rate_file):
     # rates=pd.read_csv("Rates.csv")
     rates=pd.read_csv(rate_file)
 
-    print ("\nStock Data")
+    console.print ("\nStock Data", style="underline")
     print("\n",stocks_df)
-    print("\nRates")
+    console.print("\nRates", style="underline")
     print("\n",rates,"\n")
 
     print("Model Created\n")
@@ -137,22 +142,22 @@ def import_model(stock_file, rate_file):
 # Main Code
 
 from rich import print
-print()
-print("Initialising Model")
-print()
-#Initialise Model
+from rich.console import Console
+console = Console()
 
-#model_name="Population"
-#model_duration=6
-#model_start_time=0
-#model_timestep=.083333
-model_params="Predator.csv"
 
+console.print ("Available_models\n", style="underline")
 available_models=pd.read_csv("Models.csv")
 print (available_models)
 
+print()
+user_input=input("Select model number ")
+
+console.print("\nInitialising Model\n", style="underline")
+model_params=available_models.iloc[[user_input]]['Definition'].values[0]
+
 model_data=pd.read_csv(model_params, header=None, index_col=0).to_dict()
-print(f"Name  {model_data[1]['model_name']:>14}")
+print(f"\nName  {model_data[1]['model_name']:>14}")
 print(f"Duration  {int(model_data[1]['duration']):>10}")
 print(f"Start  {int(model_data[1]['start_time']):>13}")
 print(f"Step {float(model_data[1]['timestep']):>15}")
@@ -165,6 +170,10 @@ rates,stocks = import_model(model_data[1]['stock_file'],model_data[1]['rates_fil
 
 #Execute the model
 print("\nStarting Simulation")
+
+from rich.progress import track
+
+
 simulation.run(stocks, rates)
 
 #Save the output data

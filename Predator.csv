@@ -1,7 +1,7 @@
 "model_name","Predator"
 "duration","20"
 "start_time","0"
-"timestep",".0005"
+"timestep",".001"
 "line_graph","Yes"
 "phase_plot","Yes"
 "stack_bar","No"
