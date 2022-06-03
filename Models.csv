@@ -1,0 +1,4 @@
+Name," Description"," Definition"," StockFile"," RatesFile"
+Predator," Simple Predator Model",Predator.csv," PredatorStocks.csv"," PredatorRates.csv"
+Population," UK Population Mode",PopModel.csv," PopStocks.csv"," PopRates.csv"
+Delays," Demonstrate Delays",HouseModel.csv," StockHouses.csv"," RatesHouses.csv"

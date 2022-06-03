@@ -1,3 +1,4 @@
+from matplotlib.style import available
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -42,7 +43,6 @@ class model:
         self.steps=int(duration/timestep)
         self.simtime= start_time
         self.start_time=start_time
-        print(self)
         
     def increment_time_step(self, step, stocks, rates):
         for key in stocks:
@@ -68,7 +68,7 @@ class model:
         data.to_excel(file_name)
         return data            
 
-    def plot_graphs(self, results, title,ylabel, stack_bar, line_graph):
+    def plot_graphs(self, results, title,ylabel, phase_plot, stack_bar, line_graph):
         
         
 
@@ -95,7 +95,9 @@ class model:
             plt.legend(bbox_to_anchor=(1.02, 0.1), loc='right', borderaxespad=0)
             
         #Phase plane plot, xticks=range(self.start_time,1)
-        #results.plot(x="Children", y="Adults", title="Phase Plot",xlabel="Children", ylabel="Adults", legend=False)
+        
+        if phase_plot:
+            results.plot(x=results.columns[1], y=results.columns[2], title="Phase Plot",xlabel=results.columns[1], ylabel=results.columns[2], legend=False)
         
         plt.show()
 
@@ -113,7 +115,7 @@ def import_model(stock_file, rate_file):
     stocks_df=pd.read_csv(stock_file)
     
     for index, row in stocks_df.iterrows():
-        print(row.Stock)
+        #print(row.Stock)
         stocks[row.Stock]=stock(row.Stock, row.Value)
 
     #Load rate data
@@ -121,12 +123,13 @@ def import_model(stock_file, rate_file):
     # rates=pd.read_csv("Rates.csv")
     rates=pd.read_csv(rate_file)
 
-    print ("Stock Data")
-    print(stocks_df)
-    print("")
-    print("Rates")
-    print(rates)
-    print("")
+    print ("\nStock Data")
+    print("\n",stocks_df)
+    print("\nRates")
+    print("\n",rates,"\n")
+
+    print("Model Created\n")
+   
 
     return rates, stocks
         
@@ -134,30 +137,52 @@ def import_model(stock_file, rate_file):
 # Main Code
 
 from rich import print
-
-print("Starting Simulation")
-
+print()
+print("Initialising Model")
+print()
 #Initialise Model
-model_name="Population"
-model_duration=6
-model_start_time=0
-model_timestep=.083333
 
-simulation=model(model_name,model_duration,model_start_time, model_timestep)
+#model_name="Population"
+#model_duration=6
+#model_start_time=0
+#model_timestep=.083333
+model_params="Predator.csv"
 
-rates,stocks = import_model("StockHouses.csv","RatesHouses.csv")
+available_models=pd.read_csv("Models.csv")
+print (available_models)
+
+model_data=pd.read_csv(model_params, header=None, index_col=0).to_dict()
+print(f"Name  {model_data[1]['model_name']:>14}")
+print(f"Duration  {int(model_data[1]['duration']):>10}")
+print(f"Start  {int(model_data[1]['start_time']):>13}")
+print(f"Step {float(model_data[1]['timestep']):>15}")
+
+# validate input?
+
+simulation=model(model_data[1]['model_name'],int(model_data[1]['duration']),int(model_data[1]['start_time']),float(model_data[1]['timestep']))
+
+rates,stocks = import_model(model_data[1]['stock_file'],model_data[1]['rates_file'])
 
 #Execute the model
+print("\nStarting Simulation")
 simulation.run(stocks, rates)
 
 #Save the output data
-output_file="test.xlsx"
+output_file=model_data[1]['model_name']+".xlsx"
 results=simulation.save_results(output_file)
 
-#Plot graphs
-line_graph=True
-stack_bar=True
-title="Houses Built Over time"
-ylabel="Number"
 
-simulation.plot_graphs(results, title,ylabel, stack_bar, line_graph)
+#Plot 
+def str2bool(v):
+  return v.lower() in ("yes")
+
+line_graph=bool(str2bool(model_data[1]['line_graph']))
+stack_bar=bool(str2bool(model_data[1]['stack_bar']))
+phase_plot=bool(str2bool(model_data[1]['phase_plot']))
+
+title=model_data[1]['title']
+ylabel=model_data[1]['y_label']
+
+print("\nSimulation Ended")
+
+simulation.plot_graphs(results, title,ylabel, phase_plot, stack_bar, line_graph)
